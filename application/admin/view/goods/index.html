@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>首页 - MY_API后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="MY_API,后台模板,后台管理系统,MY_APIHTML模板">
+    <meta name="description" content="MY_API是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+    <meta name="author" content="yinqi">
+    <link href="http://__url__/static/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+    <!--对话框-->
+    <link rel="stylesheet" href="http://__url__/static/Admin/js/jconfirm/jquery-confirm.min.css">
+    <link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+    <style>
+        .btn {
+            margin: 2px;
+        }
+        
+        .col-xs-6 {
+            width: 100%;
+        }
+        .goods_case{  
+            width: 100px;/* 要显示文字的宽度 */  
+            float: left;/* 左对齐，不设置的话只在IE下好用 */  
+            overflow: hidden; /* 超出的部分隐藏起来 */  
+            white-space: nowrap;/* 不显示的地方用省略号...代替 */  
+            text-overflow: ellipsis;/* 支持 IE */  
+            -o-text-overflow: ellipsis;/* 支持 Opera */  
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lyear-layout-web">
+        <div class="lyear-layout-container">
+            <!--左侧导航-->
+            {include file='./default/admin_mall/left_nav' /}
+            <!--End 左侧导航-->
+
+            <!--头部信息-->
+            {include file='./default/admin_mall/head_nav' /}
+            <!--End 头部信息-->
+
+            <!--页面主要内容-->
+            <main class="lyear-layout-content">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Api·信息配置</h4>
+                                </div>
+                                <div class="card-body">
+
+                                    <h5>接口商品配置 <code></code></h5>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>接口id</th>
+                                                <th>接口名称</th>
+                                                <th>接口描述</th>
+                                                <th>接口价格</th>
+                                                <th>调用接口地址</th>
+                                                <th>调用案例</th>
+                                                <th>接口开启状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {volist name="goods_list" id="vo"}
+                                            <tr>
+                                                <th>{$vo.goods_id}</th>
+                                                <td>{$vo.goods_name}</td>
+                                                <td><p>{$vo.goods_description}</p></td>
+                                                <td>{$vo.goods_price}元</td>
+                                                <td>{$vo.goods_url}</td>
+                                                <td>
+                                                    {if $vo['goods_case']}
+                                                    <p class="goods_case">{$vo.goods_case}</p>
+                                                    {else /}
+                                                    <p>无</p>
+                                                    {/if}
+                                                </td>
+                                                <td>
+                                                        <label class="lyear-switch switch-solid switch-primary">
+                                                                <input type="checkbox" class="goods_state" value="on" name="goods_state"{if $vo['goods_state']==1}checked{/if}>
+                                                                <span></span>
+                                                        </label>
+                                                </td>
+                                                <td>
+                                                        <a class="btn btn-xs btn-default" id="update" name="update" onclick="update({$vo.goods_id})" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                                                        {if $vo['goods_case']}
+                                                        <a class="btn btn-xs btn-default" href="http://__url__{$vo.goods_case}" title="查看" data-toggle="tooltip"><i class="mdi mdi-eye"></i></a>
+                                                        {/if}
+                                                        <a class="btn btn-xs btn-default" id="del" name="del" onclick="del({$vo.goods_id})" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                                                        <button class="btn btn-secondary btn-sm btn-primary" onclick="details({$vo.goods_id})">详细信息</button>
+                                                        <button class="btn btn-info btn-sm btn-primary" onclick="request({$vo.goods_id})">请求信息</button>
+                                                        <button class="btn btn-warning btn-sm btn-primary" onclick="returns({$vo.goods_id})">返回信息</button>
+                                                </td>
+                                            </tr>
+                                            {/volist}
+                                            <tr>
+                                                <th></th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="goods_name" name="goods_name" placeholder="名称">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="goods_description" name="goods_description" rows="6" title="可为空" data-toggle="tooltip" placeholder="接口描述"></textarea>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="goods_price" name="goods_price" placeholder="价格" data-toggle="tooltip" data-placement="bottom" title="默认免费使用">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="goods_url" name="goods_url" placeholder="调用地址">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                        <div class="form-group">
+                                                            <input class="form-control" type="text" id="goods_case" name="goods_case" title="可为空" data-toggle="tooltip" placeholder="案例">
+                                                        </div>
+                                                </td>
+                                                <td>
+                                                        <label class="lyear-switch switch-solid switch-primary">
+                                                            <input type="checkbox" class="goods_state" value="on" name="goods_state">
+                                                            <span></span>
+                                                        </label>
+                                                </td>
+                                                <td><button class="btn btn-primary btn-w-md" type="button" id="install">添加</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+    </div>
+    {include file='./default/admin_mall/js' /}
+    <!--对话框-->
+    <script src="http://__url__/static/Admin/js/jconfirm/jquery-confirm.min.js "></script>
+    <script type="text/javascript">
+        function update(id){
+            var widths = document.body.clientWidth;
+            window.open('http://__url__/index.php/admin/goods/upd?id=' + id, "newwindow=", "height=600,width=" + widths * 0.8 + ",top=200,left=" + widths * 0.1 + ",toolbar=no,menubar=no,scrollbars=no,resizable=yes, location=no,status=no");
+        }
+        
+        if ({$vo.goods_state} == 1) {
+            $('.lyear-switch').find('input[name="goods_state"]').prop('checked', true);
+        }
+
+        function del(id){
+            $.confirm({
+                title: '警告',
+                content: '确认要删除吗！',
+                type: 'orange',
+                typeAnimated: false,
+                buttons: {
+                    omg: {
+                        text: '确认',
+                        btnClass: 'btn-orange',
+                        action: function() {
+                            $.ajax({
+                                url: 'http://__url__/index.php/admin/goods/del',
+                                type: 'POST',
+                                data: {
+                                    id: id
+                                },
+                                dataType: 'json',
+                                success: function(jg) {
+                                    $.confirm({
+                                        title: '成功',
+                                        content: '提交成功!',
+                                        type: 'green',
+                                        buttons: {
+                                            close: {
+                                                text: '关闭',
+                                                action: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        }
+                                    });
+                                },
+                                error: function(jg) {
+                                    $.confirm({
+                                        title: '错误提示',
+                                        content: '提交失败,请检查后重试!',
+                                        type: 'red',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            tryAgain: {
+                                                text: '重试',
+                                                btnClass: 'btn-red',
+                                                action: function() {
+                                                    del(id);
+                                                }
+                                            },
+                                            close: {
+                                                text: '关闭'
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    close: {
+                        text: '关闭',
+                    }
+                }
+            });
+        }
+
+          $("#install").click(function(){
+            var $goods_state = $('input[name="goods_state"]:checked').val();
+            if ($goods_state == undefined) {
+                $goods_state = 0;
+            } else {
+                $goods_state = 1;
+            }
+            var $goods_name = $("#goods_name").val();
+            var $goods_price = $("#goods_price").val();
+            var $goods_url = $("#goods_url").val()
+            var $goods_case = $("#goods_case").val();
+            var $goods_description = $("#goods_description").val()
+            //alert($goods_name + '' + $goods_price + '' + $goods_description + '' + $goods_state);
+            $.ajax({
+                url: 'http://__url__/index.php/admin/goods/install',
+                type: 'POST',
+                data: {
+                    goods_name: $goods_name,
+                    goods_description: $goods_description,
+                    goods_price: $goods_price,
+                    goods_url: encodeURIComponent($goods_url),
+                    goods_case: encodeURIComponent($goods_case),
+                    goods_state: $goods_state
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    
+                    $.confirm({
+                        title: '成功',
+                        content: '提交成功!',
+                        type: 'green',
+                        buttons: {
+                            close: {
+                                text: '关闭',
+                                action: function() {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function(jg) {
+                    
+                    $.confirm({
+                        title: '错误提示',
+                        content: '提交失败,请检查后重试!',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '重试',
+                                btnClass: 'btn-red',
+                                action: function() {
+                                    recovery(user_id);
+                                }
+                            },
+                            close: {
+                                text: '关闭',
+                                action: function() {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+
+          });
+
+        function request(id){
+            //var widths = document.body.clientWidth;
+            window.open('http://__url__/index.php/admin/goods/goods_request?id=' + id);
+        }
+
+        function returns(id){
+            //var widths = document.body.clientWidth;
+            window.open('http://__url__/index.php/admin/goods/goods_return?id=' + id);
+        }
+
+        function details(id){
+            //var widths = document.body.clientWidth;
+            window.open('http://__url__/index.php/admin/goods/goods_details?id=' + id);
+        }
+
+        </script>
+</body>
+
+</html>

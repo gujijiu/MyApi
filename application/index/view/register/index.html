@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://jsdaima.hu-cheng.net/webpage/2020/03/1460/register.html -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MY_API注册</title>
+
+    <link href="http://__url__/static/Login/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="http://__url__/static/Login/js/register.js"></script>
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">创建账号!</h1>
+                            </div>
+                            <form class="user" method="POST" onsubmit="return check2();">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="user_name" name="user_name" required placeholder="注册账号">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="user" name="user" required placeholder="注册用户名">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="user_phone" name="user_phone" required placeholder="注册手机号">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="user_email" name="user_email" required placeholder="邮箱">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user" id="user_pwd" name="user_pwd" required placeholder="注册密码">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user" id="user_pwd_con" name="user_pwd_con" required placeholder="确认密码">
+                                </div>
+                                <font color="red"></font>
+                                <button type="submit" class="btn btn-primary btn-user btn-block" id="registsubmit" onclick="javascript:regist()">注册</button>
+                                <hr>
+                            </form>
+                            <div id="ts" class="ts" style="color: red;padding: 0;margin: 0;display: none;">
+                                <text style="width: 30%;">温馨提示：</text>
+                                <text id="ts_text" class="ts_text" nasme="ts_text" style="width: 50%;"></text></div>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="http://__url__/index.php/index/login">已有账号? 登录!</a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

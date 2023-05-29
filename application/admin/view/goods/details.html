@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>首页 - MY_API后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="MY_API,后台模板,后台管理系统,MY_APIHTML模板">
+    <meta name="description" content="MY_API是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+    <meta name="author" content="yinqi">
+    <link href="http://__url__/static/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+    <!--对话框-->
+    <link rel="stylesheet" href="http://__url__/static/Admin/js/jconfirm/jquery-confirm.min.css">
+    <link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+    <style>
+        .btn {
+            margin: 2px;
+        }
+        
+        .col-xs-6 {
+            width: 100%;
+        }
+        .details_request{  
+            width: 200px;/* 要显示文字的宽度 */  
+            float: left;/* 左对齐，不设置的话只在IE下好用 */  
+            overflow: hidden; /* 超出的部分隐藏起来 */  
+            white-space: nowrap;/* 不显示的地方用省略号...代替 */  
+            text-overflow: ellipsis;/* 支持 IE */  
+            -o-text-overflow: ellipsis;/* 支持 Opera */  
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lyear-layout-web">
+        <div class="lyear-layout-container">
+            <!--左侧导航-->
+            {include file='./default/admin_mall/left_nav' /}
+            <!--End 左侧导航-->
+
+            <!--头部信息-->
+            {include file='./default/admin_mall/head_nav' /}
+            <!--End 头部信息-->
+
+            <!--页面主要内容-->
+            <main class="lyear-layout-content">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Api·详情信息配置</h4>
+                                </div>
+                                <div class="card-body">
+
+                                    <h5>接口商品详情详情配置 <code></code></h5>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>详情id</th>
+                                                <th>接口id</th>
+                                                <th>返回格式</th>
+                                                <th>请求方式</th>
+                                                <th>请求示例</th>
+                                                <th>返回示例</th>
+                                                <th>示例代码</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {volist name="vo" id="vo"}
+                                            <tr>
+                                                <th>{$vo.details_id}</th>
+                                                <th>{$vo.goods_id}</th>
+                                                <td>{$vo.details_fromat}</td>
+                                                <td>{$vo.details_mode}</td>
+                                                <td>
+                                                    <p class="lead details_request">{$vo.details_request}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="lead">{$vo.details_return}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="lead">{$vo.details_examples}</p>
+                                                </td>
+                                                <td>
+                                                        <a class="btn btn-xs btn-default" id="update" name="update" onclick="update({$vo.details_id})" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                                                        <a class="btn btn-xs btn-default" id="del" name="del" onclick="del({$vo.details_id})" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                                                </td>
+                                            </tr>
+                                            {/volist}
+                                            <tr>
+                                                    <th></th>
+                                                    <th>{$id}</th>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <input class="form-control" type="text" id="details_fromat" name="details_fromat" placeholder="返回格式" title="默认为json/text" data-toggle="tooltip">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <input class="form-control" type="text" id="details_mode" name="details_mode" placeholder="请求方式" title="默认为get/post" data-toggle="tooltip">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" id="details_request" name="details_request" rows="6" title="可为空" data-toggle="tooltip" placeholder="请求示例"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" id="details_return" name="details_return" rows="6" title="可为空" data-toggle="tooltip" placeholder="返回示例"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" id="details_examples" name="details_examples" rows="6" title="可为空" data-toggle="tooltip" placeholder="代码示例"></textarea>
+                                                    </td>
+                                                    <td><button class="btn btn-primary btn-w-md" type="button" id="install">添加</button></td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+    </div>
+    {include file='./default/admin_mall/js' /}
+    <!--对话框-->
+    <script src="http://__url__/static/Admin/js/jconfirm/jquery-confirm.min.js "></script>
+    <script type="text/javascript">
+        function update(id){
+            var widths = document.body.clientWidth;
+            window.open('http://__url__/index.php/admin/goods/details_upd?id=' + id, "newwindow=", "height=600,width=" + widths * 0.8 + ",top=200,left=" + widths * 0.1 + ",toolbar=no,menubar=no,scrollbars=no,resizable=yes, location=no,status=no");
+        }
+        
+        function del(id){
+            $.confirm({
+                title: '警告',
+                content: '确认要删除吗！',
+                type: 'orange',
+                typeAnimated: false,
+                buttons: {
+                    omg: {
+                        text: '确认',
+                        btnClass: 'btn-orange',
+                        action: function() {
+                            $.ajax({
+                                url: 'http://__url__/index.php/admin/goods/details_del',
+                                type: 'POST',
+                                data: {
+                                    id: id
+                                },
+                                dataType: 'json',
+                                success: function(jg) {
+                                    $.confirm({
+                                        title: '成功',
+                                        content: '提交成功!',
+                                        type: 'green',
+                                        buttons: {
+                                            close: {
+                                                text: '关闭',
+                                                action: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        }
+                                    });
+                                },
+                                error: function(jg) {
+                                    $.confirm({
+                                        title: '错误提示',
+                                        content: '提交失败,请检查后重试!',
+                                        type: 'red',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            tryAgain: {
+                                                text: '重试',
+                                                btnClass: 'btn-red',
+                                                action: function() {
+                                                    del(id);
+                                                }
+                                            },
+                                            close: {
+                                                text: '关闭'
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    close: {
+                        text: '关闭',
+                    }
+                }
+            });
+        }
+
+          $("#install").click(function(){
+            var $details_fromat = $('#details_fromat').val();
+            var $details_mode = $("#details_mode").val();
+            var $details_request = $("#details_request").val();
+            var $details_return = $("#details_return").val();
+            var $details_examples = $("#details_examples").val();
+            //alert($details_fromat + '' + $details_mode + '' + $details_request + '' + $details_return+''+$details_examples);
+            $.ajax({
+                url: 'http://__url__/index.php/admin/goods/details_install',
+                type: 'POST',
+                data: {
+                    goods_id:{$id},
+                    details_fromat: $details_fromat,
+                    details_mode: $details_mode,
+                    details_request: encodeURIComponent($details_request),
+                    details_return: encodeURIComponent($details_return),
+                    details_examples: encodeURIComponent($details_examples)
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    
+                    $.confirm({
+                        title: '成功',
+                        content: '提交成功!',
+                        type: 'green',
+                        buttons: {
+                            close: {
+                                text: '关闭',
+                                action: function() {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function(jg) {
+                    
+                    $.confirm({
+                        title: '错误提示',
+                        content: '提交失败,请检查后重试!',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '重试',
+                                btnClass: 'btn-red',
+                                action: function() {
+                                    recovery(user_id);
+                                }
+                            },
+                            close: {
+                                text: '关闭',
+                                action: function() {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+
+          });
+        </script>
+</body>
+
+</html>

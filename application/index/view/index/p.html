@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MY_API - MM_API数据接口调用服务平台</title>
+<link href="http://__url__/static/Index/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://__url__/static/Index/css/font-awesome.min.css" rel="stylesheet">
+<link href="http://__url__/static/Index/css/site.min.css" rel="stylesheet">
+</head>
+<body class="home-template">
+<header class="site-header"><nav class="navbar navbar-static-top main-navbar" id="top">
+<div class="container">
+	<div class="navbar-header">
+		<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand brand-UomgAPI text-hide">MY_API</a>
+	</div>
+	<nav id="bs-navbar" class="collapse navbar-collapse">
+	<ul class="nav navbar-nav navbar-right">
+			<li><a href="http://__url__/index.php/admin/login">进入后台</a></li>
+			<li><a href="http://__url__/index.php/index/login">登陆</a></li>
+			<li><a href="http://__url__/index.php/index/login/register">注册</a></li>
+			<li><a href="http://__url__/index.php/index/login/login_out">退出登陆</a></li>
+	</ul>
+	</nav>
+</div>
+</nav>
+<div class="container jumbotron">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>{$goods_list.goods_name}<img src="http://__url__/static/Index/picture/uomgapi.svg" alt="MY_API logo" class="hidden"></h1>
+            <p>{$goods_list.goods_description}</p>
+            <p>价格：{$goods_list.goods_price}元</p>
+		</div>
+	</div>
+</div>
+<div class="package-info well well-md text-center"><div class="container">
+	<ul class="list-inline">
+		<li><a href="#api" data-toggle="tab">API文档</a></li>
+		<li><a href="#code" data-toggle="tab">错误码参照</a></li>
+		<li><a href="#demo" data-toggle="tab">示例代码</a></li>
+	</ul>
+</div></div>
+</header>
+<main class="container tab-content" id="myTabContent">
+	<article class="markdown-body tab-pane fade in active" id="api">
+		<div class="api-sub-content">
+		    <div class="simpleline"><strong>接口地址：</strong><span class="url">http://__url__{$goods_list.goods_url}</span></div>
+		    <div class="simpleline"><strong>返回格式：</strong><span class="url">{$details_list.details_fromat}</span></div>
+		    <div class="simpleline"><strong>请求方式：</strong><span class="url">{$details_list.details_fromat}</span></div>
+		    <div class="simpleline"><strong>请求示例：</strong><a href="http://__url__{$goods_list.goods_case}"><span class="url">{$details_list.details_request}</span></a></div>
+		    <div class="simpleTable">
+		        <p class="linep">请求参数说明：</p>
+		        <table class="api-table" border="0" cellspacing="0" cellpadding="0">
+		          <tbody>
+		            <tr class="title">
+		                <th width="20"></th>
+		                <th width="100">名称</th>
+		                <th width="60">必填</th>
+		                <th width="80">类型</th>
+		                <th>说明</th>
+					</tr>
+					{volist name="request_list" id="vo"}
+		            <tr>
+		                <td>&nbsp;</td>
+		                <td class="url">{$vo.request_name}</td>
+		                <td class="url">{if $vo['request_nece'] == 1}是{else /}否{/if}</td>
+		                <td class="url">{$vo.request_type}</td>
+		                <td>{$vo.request_explain}</td>
+					</tr>
+					{/volist}
+		            		          </tbody>
+		     	</table>
+		    </div>
+		    <div class="simpleTable">
+		        <p class="linep">返回参数说明：</p>
+		        <table class="api-table" border="0" cellspacing="0" cellpadding="0">
+		            <tbody>
+					<tr class="title">
+		                <th width="20"></th>
+		                <th width="100">名称</th>
+		                <th width="80">类型</th>
+		                <th>说明</th>
+		            </tr>
+		            {volist name="return_list" id="vo"}
+		            <tr>
+		                <td>&nbsp;</td>
+		                <td class="url">{$vo.return_name}</td>
+		                <td class="url">{$vo.return_type}</td>
+		                <td>{$vo.return_explain}</td>
+					</tr>
+					{/volist}
+		            </tbody>
+		        </table>
+		    </div>
+		    <div class="simpleTable">
+		        <p class="linep">返回示例：</p><div class="prediv">
+					<pre>{$details_list.details_return}</pre>
+				</div>
+			</div>
+		</div>
+	</article>
+	<article class="markdown-body tab-pane fade" id="code">
+		  <div class="api-sub-content"> 
+		   <div class="simpleTable"> 
+		    <p class="linep"> 服务级错误码参照(error_code)： </p> 
+		    <table class="api-table" border="0" cellspacing="0" cellpadding="0"> 
+		     <tbody> 
+		      <tr> 
+		       <th width="20"> &nbsp; </th> 
+		       <th width="200"> 错误码 </th> 
+		       <th> 说明 </th> 
+		      </tr> 
+		      		      <tr>
+		          <td>&nbsp;</td>
+		          <td class="url">密钥错误，请注册获取密钥！</td>
+		          <td>账户状态异常！</td>
+		      </tr>
+		      		     </tbody> 
+		    </table> 
+		   </div> 
+		   <div class="simpleTable"> 
+		    <p class="linep"> 系统级状态码参照： </p> 
+		    <table class="api-table" border="0" cellspacing="0" cellpadding="0"> 
+		     <tbody> 
+		      <tr> 
+		       <th width="20"> &nbsp; </th> 
+		       <th width="200"> 状态码码 </th> 
+		       <th> 说明 </th> 
+		       <th width="150"> 错误信息 </th> 
+		      </tr> 
+		      <tr> 
+		       <td> &nbsp; </td> 
+		       <td class="url"> 200 </td> 
+		       <td class="text"> 成功 </td> 
+		       
+		      </tr> 
+
+		      <tr> 
+		       <td> &nbsp; </td> 
+		       <td class="url"> 500 </td> 
+		       <td class="text"> 失败 </td> 
+               
+               <td class="text">具体错误信息看“message”</td>
+		      </tr> 
+		     </tbody> 
+		    </table> 
+		   </div> 
+		   <div class="simpleTable"> 
+		    <p class="linep"> 错误码格式说明（示例：404）： </p> 
+		    <table class="api-table" border="0" cellspacing="0" cellpadding="0"> 
+		     <tbody> 
+		      <tr> 
+		       <th width="20"> &nbsp; </th> 
+		       <th width="200">404</th> 
+		       <th width="200"> 000 </th> 
+		       
+		      </tr> 
+		      <tr> 
+		       <td> &nbsp; </td> 
+		       <td> 已失效 </td> 
+		       <td> 已关闭 </td> 
+		        
+		      </tr> 
+		     </tbody> 
+		    </table> 
+		   </div> 
+		  </div>
+	</article>
+	<article class="markdown-body tab-pane fade" id="demo">
+		<div class="simpleTable">
+		    <p class="linep">调用代码示例：</p>
+		    <div class="prediv">
+		    	<pre>
+					{$details_list.details_examples}
+				</pre>
+		    </div>
+		</div>
+	</article>
+</main>
+<footer id="footer" class="footer hidden-print">
+        <div class="container">
+            <div class="row">
+                <div class="footer-about col-md-5 col-sm-12" id="about">
+                    <h4>关于 MY_API</h4>
+                    <p>
+                        MY_API 是 LSY 支持并维护的 API 接口项目，致力于为用户提供稳定、快速的免费 API 接口服务平台。
+                    </p>
+                    
+                    <p>
+                        反馈或建议请发送邮件至：2991993849@qq.com
+                    </p>
+                </div>
+                <div class="footer-links col-md-3 col-sm-12">
+                    <h4>友情链接</h4>
+                    <ul class="list-unstyled list-inline">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right">
+            <span>&copy; 2021-2021</span><a href="javascript:;" target="_blank">毕设项目-MY_API</a><span></span>
+        </div>
+    </footer><a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+	<script src="https://lib.baomitu.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://lib.baomitu.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+    <script src="https://lib.baomitu.com/clipboard.js/1.5.16/clipboard.min.js"></script>
+    <script src="https://lib.baomitu.com/localforage/1.4.2/localforage.min.js"></script>
+    <script src="https://lib.baomitu.com/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="https://lib.baomitu.com/layer/3.1.1/layer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>个人信息 - 光年(Light Year Admin)后台管理系统模板</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+<link href="http://__url__/static/Admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://__url__/static/Admin/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    {include file='./default/admin_mall/left_nav' /}
+    <!--End 左侧导航-->
+    {include file='./default/admin_mall/head_nav' /}
+    <!--End 头部信息-->
+    
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                
+                <div class="edit-avatar">
+                  {if $user['user_img'] != null}
+                  <img src="http://__url__{$user.user_img}" alt="..." class="img-avatar">
+                  {else /}
+                  <img src="http://__url__/static/Admin/images/users/avatar.jpg" alt="..." class="img-avatar" height="264px" width="264px">
+                  {/if}
+                  <div class="avatar-divider"></div>
+                  <div class="edit-avatar-content">
+                    <form action="{:url('admin/index/upload')}" class="demo" method="post" enctype="multipart/form-data">
+                      <input type="file" name="file">
+                    <button class="btn btn-default" id="sc_tp">修改头像</button>
+                    </form>
+                    <p class="m-0">选择一张你喜欢的图片，图片尺寸最好为264x264大小，上传图片大小不能超过2M。</p>
+                  </div>
+                </div>
+                <hr>
+              
+       
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+{include file='./default/admin_mall/js' /}
+
+<script>
+    // 文件上传js
+    $('#sc_tp').click(function(){
+        // 判断不允许为空
+        if($("input[name=file]").val() == ""){
+            alert("亲，不允许为空哦！");
+            return false;
+        }
+        $(".demo").submit();
+    })
+</script>
+</body>
+</html>

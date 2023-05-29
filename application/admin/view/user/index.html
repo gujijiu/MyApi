@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>首页 - MY_API后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="MY_API,后台模板,后台管理系统,MY_APIHTML模板">
+    <meta name="description" content="MY_API是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+    <meta name="author" content="yinqi">
+    <link href="http://__url__/static/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+    <!--对话框-->
+    <link rel="stylesheet" href="http://__url__/static/Admin/js/jconfirm/jquery-confirm.min.css">
+    <link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+    <style>
+        .btn {
+            margin: 2px;
+        }
+        
+        .col-xs-6 {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lyear-layout-web">
+        <div class="lyear-layout-container">
+            <!--左侧导航-->
+            {include file='./default/admin_mall/left_nav' /}
+            <!--End 左侧导航-->
+
+            <!--头部信息-->
+            {include file='./default/admin_mall/head_nav' /}
+            <!--End 头部信息-->
+
+            <!--页面主要内容-->
+            <main class="lyear-layout-content">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>用户管理设置</h4>
+                                </div>
+                                <div class="card-body">
+
+                                    <h5>用户信息 <code></code></h5>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>用户id</th>
+                                                <th>昵称</th>
+                                                <th>账户</th>
+                                                <th>密码</th>
+                                                <th>手机号</th>
+                                                <th>邮箱</th>
+                                                <th>API_KEY</th>
+                                                <th>余额</th>
+                                                <th>注册IP</th>
+                                                <th>注册时间</th>
+                                                <th>最近登陆IP</th>
+                                                <th>最近登陆时间</th>
+                                                <th>用户权限</th>
+                                                <th>用户是否限制登陆</th>
+                                                <th>用户是否激活</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {volist name="user_list" id="vo"}
+                                            <tr>
+                                                <th scope="row">{$vo.user_id}</th>
+                                                <td>{$vo.user}</td>
+                                                <td>{$vo.user_name}</td>
+                                                <td><button class="btn btn-dark btn-w-md" type="button" onclick="user_pwd('{$vo.user_pwd}')">点击查看</button></td>
+                                                <td>{$vo.user_phone}</td>
+                                                <td>{$vo.user_email}</td>
+                                                <td><button class="btn btn-dark btn-w-md" type="button" onclick="api_key('{$vo.api_key}')">点击查看</button></td>
+                                                <td>{$vo.user_money}</td>
+                                                <td>{$vo.user_reg_ip}</td>
+                                                <td>{$vo.user_reg_time}</td>
+                                                <td>{$vo.user_log_ip}</td>
+                                                <td>{$vo.user_log_time}</td>
+                                                <td>{$vo.user_permission}</td>
+                                                <td>{$vo.user_del}</td>
+                                                <td>{$vo.user_state}</td>
+                                                <td><button class="btn btn-primary btn-w-md" type="button" onclick="update({$vo.user_id})">修改</button>
+                                                    <button class="btn btn-pink btn-w-md" type="button" onclick="prohibit({$vo.user_id})">禁止登陆</button>
+                                                    <button class="btn btn-danger btn-w-md" type="button" onclick="del({$vo.user_id})">删除</button><button class=" btn btn-cyan btn-w-md " type="button " onclick="recovery({$vo.user_id}) ">恢复登陆</button></td>
+                                            </tr>
+                                            {/volist}
+                                            <tr>
+                                                <th scope="row">{$vo.user_id+1}</th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="user" name="user" placeholder="昵称">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="user_name" name="user_name" placeholder="账号">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="user_pwd" name="user_pwd" placeholder="密码">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="user_phone" name="user_phone" placeholder="手机号">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="user_email" name="user_email" placeholder="邮箱">
+                                                    </div>
+                                                </td>
+                                                <td><input class="form-control" type="text" id="example-disabled-input" name="example-disabled-input" placeholder="不用填写" disabled></td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" id="user_money" name="user_money" placeholder="余额">
+                                                    </div>
+                                                </td>
+                                                <td><input class="form-control" type="text" id="example-disabled-input" name="example-disabled-input" placeholder="不用填写" disabled></td>
+                                                <td><input class="form-control" type="text" id="example-disabled-input" name="example-disabled-input" placeholder="不用填写" disabled></td>
+                                                <td><input class="form-control" type="text" id="example-disabled-input" name="example-disabled-input" placeholder="不用填写" disabled></td>
+                                                <td><input class="form-control" type="text" id="example-disabled-input" name="example-disabled-input" placeholder="不用填写" disabled></td>
+                                                <td>
+                                                    <div class="form-group row m-b-10">
+                                                        <div class="col-xs-6">
+                                                            <label class="lyear-switch switch-solid switch-primary">
+                                                        <input type="checkbox" class="user_permission" value="on" name="user_permission">
+                                                        <span></span>
+                                                        </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group row m-b-10">
+                                                        <div class="col-xs-6">
+                                                            <label class="lyear-switch switch-solid switch-primary">
+                                                        <input type="checkbox" class="user_del" value="on" name="user_del">
+                                                        <span></span>
+                                                        </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group row m-b-10">
+                                                        <div class="col-xs-6">
+                                                            <label class="lyear-switch switch-solid switch-primary">
+                                                                <input type="checkbox" class="user_state" value="on" name="user_state">
+                                                                <span></span>
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-w-md" type="button" onclick="install()">添加</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+    </div>
+    {include file='./default/admin_mall/js' /}
+    <!--对话框-->
+    <script src="http://__url__/static/Admin/js/jconfirm/jquery-confirm.min.js "></script>
+    <script>
+        function user_pwd(user_pwd) {
+            $.alert({
+                title: '密码',
+                content: user_pwd,
+                buttons: {
+                    cancel: {
+                        text: '取消',
+                    }
+                }
+            });
+        }
+
+        function api_key(api_key) {
+            $.alert({
+                title: '密钥',
+                content: api_key,
+                buttons: {
+                    cancel: {
+                        text: '取消',
+                    }
+                }
+            });
+        }
+
+        function update(user_id) {
+            var widths = document.body.clientWidth;
+            window.open('http://__url__/index.php/admin/user/upd?user_id=' + user_id, "newwindow=", "height=600,width=" + widths * 0.8 + ",top=200,left=" + widths * 0.1 + ",toolbar=no,menubar=no,scrollbars=no,resizable=yes, location=no,status=no");
+        }
+
+        function prohibit(user_id) {
+            $.ajax({
+                url: 'http://__url__/index.php/admin/user/prohibit',
+                type: 'POST',
+                data: {
+                    user_id: user_id
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    $.confirm({
+                        title: '成功',
+                        content: '提交成功!',
+                        type: 'green',
+                        buttons: {
+                            close: {
+                                text: '关闭',
+                                action: function() {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function(jg) {
+                    $.confirm({
+                        title: '错误提示',
+                        content: '提交失败,请检查后重试!',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '重试',
+                                btnClass: 'btn-red',
+                                action: function() {
+                                    prohibit(user_id);
+                                }
+                            },
+                            close: {
+                                text: '关闭'
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        function recovery(user_id) {
+            $.ajax({
+                url: 'http://__url__/index.php/admin/user/recovery',
+                type: 'POST',
+                data: {
+                    user_id: user_id
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    $.confirm({
+                        title: '成功',
+                        content: '提交成功!',
+                        type: 'green',
+                        buttons: {
+                            close: {
+                                text: '关闭',
+                                action: function() {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function(jg) {
+                    $.confirm({
+                        title: '错误提示',
+                        content: '提交失败,请检查后重试!',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '重试',
+                                btnClass: 'btn-red',
+                                action: function() {
+                                    recovery(user_id);
+                                }
+                            },
+                            close: {
+                                text: '关闭'
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        function del(user_id) {
+            $.confirm({
+                title: '警告',
+                content: '确认要删除吗！',
+                type: 'orange',
+                typeAnimated: false,
+                buttons: {
+                    omg: {
+                        text: '确认',
+                        btnClass: 'btn-orange',
+                        action: function() {
+                            $.ajax({
+                                url: 'http://__url__/index.php/admin/user/del',
+                                type: 'POST',
+                                data: {
+                                    user_id: user_id
+                                },
+                                dataType: 'json',
+                                success: function(jg) {
+                                    $.confirm({
+                                        title: '成功',
+                                        content: '提交成功!',
+                                        type: 'green',
+                                        buttons: {
+                                            close: {
+                                                text: '关闭',
+                                                action: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        }
+                                    });
+                                },
+                                error: function(jg) {
+                                    $.confirm({
+                                        title: '错误提示',
+                                        content: '提交失败,请检查后重试!',
+                                        type: 'red',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            tryAgain: {
+                                                text: '重试',
+                                                btnClass: 'btn-red',
+                                                action: function() {
+                                                    del(user_id);
+                                                }
+                                            },
+                                            close: {
+                                                text: '关闭',
+                                                action: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    close: {
+                        text: '关闭',
+                    }
+                }
+            });
+        }
+
+        function install() {
+            var $user_permission = $('input[name="user_permission"]:checked').val();
+            if ($user_permission == undefined) {
+                $user_permission = 0;
+            } else {
+                $user_permission = 60;
+            }
+            var $user_del = $('input[name="user_del"]:checked').val();
+            if ($user_del == undefined) {
+                $user_del = 0;
+            } else {
+                $user_del = 1;
+            }
+            var $user_state = $('input[name="user_state"]:checked').val();
+            if ($user_state == undefined) {
+                $user_state = 0;
+            } else {
+                $user_state = 1;
+            }
+            var $user = document.getElementById("user").value;
+            var $user_name = document.getElementById("user_name").value;
+            var $user_pwd = document.getElementById("user_pwd").value;
+            var $user_email = document.getElementById("user_email").value;
+            var $user_phone = document.getElementById("user_phone").value;
+            var $user_money = document.getElementById("user_money").value;
+            //alert($user + '' + $user_name + '' + $user_pwd + '' + $user_phone + '' + $user_email + '' + $user_money + '' + $user_permission + '' + $user_del + '' + $user_state);
+            $.ajax({
+                url: 'http://__url__/index.php/admin/user/install_user',
+                type: 'POST',
+                data: {
+                    user: $user,
+                    user_name: $user_name,
+                    user_pwd: $user_pwd,
+                    user_phone: $user_phone,
+                    user_email: $user_email,
+                    user_money: $user_money,
+                    user_permission: $user_permission,
+                    user_del: $user_del,
+                    user_state: $user_state
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    
+                    $.confirm({
+                        title: '成功',
+                        content: '提交成功!',
+                        type: 'green',
+                        buttons: {
+                            close: {
+                                text: '关闭',
+                                action: function() {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function(jg) {
+                    
+                    $.confirm({
+                        title: '错误提示',
+                        content: '提交失败,请检查后重试!',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '重试',
+                                btnClass: 'btn-red',
+                                action: function() {
+                                    recovery(user_id);
+                                }
+                            },
+                            close: {
+                                text: '关闭'
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
+</body>
+
+</html>

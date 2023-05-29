@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>首页 - MY_API后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="MY_API,后台模板,后台管理系统,MY_APIHTML模板">
+    <meta name="description" content="MY_API是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+    <meta name="author" content="yinqi">
+    <link href="http://__url__/static/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="http://__url__/static/Admin/css/style.min.css" rel="stylesheet">
+    <style>
+        .lyear-layout-content {
+            padding-left: 0px;
+        }
+        
+        .col-xs-6 {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="lyear-layout-content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>接口详情信息管理设置</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <h5>接口详情信息 <code></code></h5>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>详情id</th>
+                                        <th>接口id</th>
+                                        <th>返回格式</th>
+                                        <th>请求方式</th>
+                                        <th>请求示例</th>
+                                        <th>返回示例</th>
+                                        <th>示例代码</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>{$vo.details_id}</th>
+                                        <th>{$vo.goods_id}</th>
+                                        <td>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="details_fromat" name="details_fromat" placeholder="返回格式"  onblur="details_fromat()" value="{$vo.details_fromat}" >
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="details_mode" name="details_mode" placeholder="请求方式"  onblur="details_mode()" value="{$vo.details_mode}" >
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="details_request" name="details_request" rows="6" title="可为空" data-toggle="tooltip" placeholder="请求示例" onblur="details_request()"></textarea>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="details_return" name="details_return" rows="6" title="可为空" data-toggle="tooltip" placeholder="返回示例" onblur="details_return()"></textarea>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="details_examples" name="details_examples" rows="6" title="可为空" data-toggle="tooltip" placeholder="代码示例" onblur="details_examples()"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    {include file='./default/admin_mall/js' /}
+    <!--消息提示-->
+    <script src="http://__url__/static/Admin/js/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="http://__url__/static/Admin/js/lightyear.js"></script>
+    <script>  
+        document.getElementById("details_request").value="{$vo.details_request}";
+        document.getElementById("details_return").value="{$vo.details_return}";
+        document.getElementById("details_examples").value="{$vo.details_examples}";
+        function details_fromat() {
+            var par = document.getElementById("details_fromat").value;
+            $.ajax({
+                url: 'http://__url__/index.php/admin/goods/upd_details_fromat',
+                type: 'POST',
+                data: {
+                    details_id: {$vo.details_id},
+                    details_fromat: par
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改成功!', 'success', 3000);
+                    }, 1e3)
+                },
+                error: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改失败，请检查重试！', 'danger', 100);
+                    }, 1e3)
+                }
+            });
+        }
+
+        function details_mode() {
+            var par = document.getElementById("details_mode").value;
+            $.ajax({
+                url: 'http://__url__/index.php/admin/goods/upd_details_mode',
+                type: 'POST',
+                data: {
+                    details_id: {$vo.details_id},
+                    details_mode: par
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改成功!', 'success', 3000);
+                    }, 1e3)
+                },
+                error: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改失败，请检查重试！', 'danger', 100);
+                    }, 1e3)
+                }
+            });
+        }
+
+        function details_request() {
+            var par = document.getElementById("details_request").value;
+            $.ajax({
+                url: 'http://__url__/index.php/admin/goods/upd_details_request',
+                type: 'POST',
+                data: {
+                    details_id: {$vo.details_id},
+                    details_request: encodeURIComponent(par)
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改成功!', 'success', 3000);
+                    }, 1e3)
+                },
+                error: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改失败，请检查重试！', 'danger', 100);
+                    }, 1e3)
+                }
+            });
+        }
+
+        function details_return() {
+            var par = document.getElementById("details_return").value;
+            $.ajax({
+                url: 'http://__url__/index.php/admin/goods/upd_details_return',
+                type: 'POST',
+                data: {
+                    details_id: {$vo.details_id},
+                    details_return: encodeURIComponent(par)
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改成功!', 'success', 3000);
+                    }, 1e3)
+                },
+                error: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改失败，请检查重试！', 'danger', 100);
+                    }, 1e3)
+                }
+            });
+        }
+
+        function details_examples() {
+            var par = document.getElementById("details_examples").value;
+            $.ajax({
+                url: 'http://__url__/index.php/admin/goods/upd_details_examples',
+                type: 'POST',
+                data: {
+                    details_id: {$vo.details_id},
+                    details_examples: encodeURIComponent(par)
+                },
+                dataType: 'json',
+                success: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改成功!', 'success', 3000);
+                    }, 1e3)
+                },
+                error: function(jg) {
+                    lightyear.loading('show');
+                    // 假设ajax提交操作
+                    setTimeout(function() {
+                        lightyear.loading('hide');
+                        lightyear.notify('修改失败，请检查重试！', 'danger', 100);
+                    }, 1e3)
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

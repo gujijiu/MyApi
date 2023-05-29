@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>alert样式修改</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+        
+        .con {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .1);
+            position: relative;
+        }
+        
+        #msg {
+            position: absolute;
+            top: 30%;
+            left: 35%;
+        }
+        
+        .info_message {
+            color: #000;
+            background: #fff;
+            height: 200px;
+            display: inline-block;
+            width: 400px;
+            border-radius: 5px;
+        }
+        
+        #alertSure,
+        #alertCancel {
+            position: absolute;
+            top: 75%;
+            left: 46%;
+            width: 90px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: #2e9cce;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        #alertSure {
+            top: 75%;
+            left: 46%;
+        }
+        
+        #alertCancel {
+            top: 75%;
+            left: 74%;
+        }
+        
+        .detail_message {
+            width: 350px;
+            height: 115px;
+            text-align: center;
+            overflow: hidden;
+            display: inline-block;
+            padding: 10px;
+            margin-left: 15px;
+            color: #2b9bc5;
+        }
+        
+        #alertSure:hover,
+        #alertCancel:hover {
+            background: rgba(118, 206, 247, 0.88);
+        }
+        
+        .alertTitle {
+            height: 30px;
+            background: rgb(114, 209, 255);
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://__url__/static/js/alert.js"></script>
+</head>
+
+<body>
+    <!-- <div class="con">
+	<div id='msg'>
+		<div class="info_message">
+			<div class="alertTitle"></div>
+			<span class="detail_message">
+				显示信息显示信息
+			</span>
+		</div>
+		<div id="alertSure">确定</div>
+		<div id="alertCancel">取消</div>
+	</div>
+</div> -->
+
+    <script>
+        alert('测试12333333');
+    </script>
+
+
+</body>
+
+</html>
